@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Utils\DB.cs" />
     <Compile Include="Utils\DelegateCommand.cs" />
+    <Compile Include="Utils\ImageProcess.cs" />
     <Compile Include="ViewModel\PersonsViewModel.cs" />
     <Compile Include="View\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>

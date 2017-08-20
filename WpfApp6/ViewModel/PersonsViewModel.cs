@@ -119,61 +119,19 @@ namespace WpfApp6.ViewModel
             }
             OnPropertyChanged("LoadSaveDiractory");
         }
-        private void ImageFromPath()
-        {
-            try
-            {
-                personforAdd.Image = new BitmapImage(new Uri(_savepath, UriKind.Absolute));
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("There was an error with format of file." +
-                    "Please check the path.");
-            }
-        }
-        private string _savepath = "";
+        
+        private string savepath = "";
         public string Savepath
         {
-            get { return _savepath; }
+            get { return savepath; }
             set
             {
-                _savepath = value;
-                OnPropertyChanged("Savepath");
-                ImageFromPath();
+                savepath = value; 
+                if(ImageProcess.ImageFromPath(savepath, personforAdd))
+                    OnPropertyChanged("savepath");
             }
         }
-        public static byte[] imageToByteArray(BitmapImage imageIn)
-        {
-            try
-            {
-                byte[] data;
-                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(imageIn));
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    encoder.Save(ms);
-                    data = ms.ToArray();
-                }
-                return data;
-            }
-            catch { return null; }//убрать
-        }
-        public static BitmapImage FromByteToImage(byte[] array)
-        {
-            using (var ms = new System.IO.MemoryStream(array))
-            {
-                try
-                {
-                    var image = new BitmapImage();
-                    image.BeginInit();
-                    image.CacheOption = BitmapCacheOption.OnLoad; // here
-                    image.StreamSource = ms;
-                    image.EndInit();
-                    return image;
-                }
-                catch { return null; }//надо будет убрать это
-            }
-        }
+        
         #endregion
     }
 

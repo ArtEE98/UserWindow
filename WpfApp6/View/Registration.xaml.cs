@@ -34,7 +34,7 @@ namespace WpfApp6.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            t1.Clear();t2.Clear();t3.Clear();t5.Clear();t4.SelectedValue=-1; t6.Clear();
+            t1.Clear();t2.Clear();t3.Clear();t5.Clear();t4.SelectedValue=-1; t6.Clear(); t7.Clear();
         }
     }
 }

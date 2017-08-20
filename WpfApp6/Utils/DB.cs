@@ -23,7 +23,7 @@ namespace WpfApp6.Utils
             });
             foreach (var personFromDb in DATAFromdb)
             {
-                currerntModelOfPersons.Persons.Add(new Person { Id = personFromDb.id.ToString(), Login = personFromDb.login, Pass = personFromDb.password, FirstName = personFromDb.name, LastName = personFromDb.surname, Sex = personFromDb.sex, Age = personFromDb.age,Image=PersonsViewModel.FromByteToImage(personFromDb.image)});
+                currerntModelOfPersons.Persons.Add(new Person { Id = personFromDb.id.ToString(), Login = personFromDb.login, Pass = personFromDb.password, FirstName = personFromDb.name, LastName = personFromDb.surname, Sex = personFromDb.sex, Age = personFromDb.age,Image=ImageProcess.FromByteToImage(personFromDb.image)});
             }
 
         }
@@ -58,7 +58,7 @@ namespace WpfApp6.Utils
                     surname = p.LastName,
                     age = p.Age,
                     sex = p.Sex,
-                    image= PersonsViewModel.imageToByteArray(p.Image),
+                    image= ImageProcess.imageToByteArray(p.Image),
                     photo = ""
                 };
                 context.users.Add(userforaddingInDb);
