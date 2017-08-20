@@ -1,0 +1,86 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" x:Name="page" 
+      x:Class="WpfApp6.View.Page3"
+      mc:Ignorable="d"
+      Title="Page3">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ListView x:Name ="Persons" Grid.Column ="0" ItemsSource="{Binding Persons}" SelectedItem="{Binding Selected}" Height="{Binding ActualHeight, ElementName=page, Mode=OneWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <TextBlock Text="FirstName: " />
+                        <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
+                        <TextBlock Text=" LastName: " />
+                        <TextBlock Text="{Binding LastName}" FontWeight="Bold" />
+                    </DockPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid Grid.Column="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" DataContext="{Binding SelectedItem, ElementName=Persons}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2.5*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="1" Content="ID:" HorizontalContentAlignment="Right" />
+                <Label Grid.Row="0" Grid.Column="2" Content="{Binding Id}"/>
+            </Grid>
+            <Grid Grid.Row="1" DataContext="{Binding SelectedItem, ElementName=Persons}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image  Grid.Column="0" Source="{Binding Image}" Height="120" Stretch="Uniform" Grid.ColumnSpan="1" />
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0"  Text="{Binding FirstName}" />
+                    <TextBox Grid.Row="1" Text="{Binding LastName}" />
+                    <TextBox Grid.Row="2"  Text="{Binding Age}" />
+                    <TextBox Grid.Row="3"  Text="{Binding Sex}"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2" Margin="0 0 0 0" DataContext="{Binding SelectedItem, ElementName=Persons}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label  Grid.Column="0" Content="Login:" HorizontalContentAlignment="Right" />
+                <Label Grid.Column="1"  Content="{Binding Login}"/>
+                <Label  Grid.Column="2" Content="Pass:" HorizontalContentAlignment="Right" />
+                <Label Grid.Column="3" Content="{Binding Pass}"/>
+            </Grid>
+
+            <Grid Grid.Row="3" Margin="0 1 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Content="Delete person" Grid.Column="1" Command="{Binding RemovePersonCommand}"/>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Page>
