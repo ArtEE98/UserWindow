@@ -45,7 +45,7 @@
                     <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="t7" Grid.Column="0" Text="{Binding Savepath}" />
+                <TextBox x:Name="t7" Grid.Column="0" Text="{Binding Savepath,UpdateSourceTrigger=LostFocus}" />
                 <Button  x:Name="t8"   Content="Add photo" Grid.Column="1"  Command="{Binding SaveDiractory}" Background="{x:Null}" BorderBrush="#FFE3DEEC" FontWeight="Normal" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Right" Foreground="#DD443B3B" />
             </Grid>
         </Grid>

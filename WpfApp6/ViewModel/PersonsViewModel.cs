@@ -5,6 +5,10 @@ using WpfApp6.Model;
 using WpfApp6.Utils;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Drawing;
+using System.Windows.Media.Imaging;
+using System;
+using System.IO;
 
 namespace WpfApp6.ViewModel
 {
@@ -115,6 +119,18 @@ namespace WpfApp6.ViewModel
             }
             OnPropertyChanged("LoadSaveDiractory");
         }
+        private void ImageFromPath()
+        {
+            try
+            {
+                personforAdd.Image = new BitmapImage(new Uri(_savepath, UriKind.Absolute));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("There was an error with format of file." +
+                    "Please check the path.");
+            }
+        }
         private string _savepath = "";
         public string Savepath
         {
@@ -123,6 +139,39 @@ namespace WpfApp6.ViewModel
             {
                 _savepath = value;
                 OnPropertyChanged("Savepath");
+                ImageFromPath();
+            }
+        }
+        public static byte[] imageToByteArray(BitmapImage imageIn)
+        {
+            try
+            {
+                byte[] data;
+                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(imageIn));
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    encoder.Save(ms);
+                    data = ms.ToArray();
+                }
+                return data;
+            }
+            catch { return null; }//убрать
+        }
+        public static BitmapImage FromByteToImage(byte[] array)
+        {
+            using (var ms = new System.IO.MemoryStream(array))
+            {
+                try
+                {
+                    var image = new BitmapImage();
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad; // here
+                    image.StreamSource = ms;
+                    image.EndInit();
+                    return image;
+                }
+                catch { return null; }//надо будет убрать это
             }
         }
         #endregion
