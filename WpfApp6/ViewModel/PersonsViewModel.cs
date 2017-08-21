@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Windows.Media.Imaging;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace WpfApp6.ViewModel
 {
@@ -117,6 +118,7 @@ namespace WpfApp6.ViewModel
             {
                 Savepath = browse.FileName;
             }
+            
             OnPropertyChanged("LoadSaveDiractory");
         }
         

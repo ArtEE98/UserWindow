@@ -9,12 +9,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="20" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel  Grid.Row="0" Orientation="Vertical" Margin="0 0 0 0" >
             <Button Content="SHow all persons" Margin="0 0 0 0" Click="Button_Click" />
             <Button Content="Create a new person" Margin="0 2 0 0" Click="Button_Click_1" />
         </StackPanel>
-        <Frame Grid.Row="2" x:Name="Main" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Center" NavigationUIVisibility="Hidden" />
+        <Frame Grid.Row="2" x:Name="Main" NavigationUIVisibility="Hidden" VerticalAlignment="Center" />
     </Grid>
 </Window>

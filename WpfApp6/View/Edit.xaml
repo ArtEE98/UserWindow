@@ -11,7 +11,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ListView x:Name ="Persons" Grid.Column ="0" ItemsSource="{Binding Persons}" SelectedItem="{Binding Selected}" Height="{Binding ActualHeight, ElementName=page, Mode=OneWay}">
+        <ListView x:Name ="Persons" Grid.Column ="0" ItemsSource="{Binding Persons}" SelectedItem="{Binding Selected}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <DockPanel>
@@ -40,7 +40,7 @@
                 <Label Grid.Row="0" Grid.Column="1" Content="ID:" HorizontalContentAlignment="Right" />
                 <Label Grid.Row="0" Grid.Column="2" Content="{Binding Id}"/>
             </Grid>
-            <Grid Grid.Row="1" DataContext="{Binding SelectedItem, ElementName=Persons}">
+            <Grid Grid.Row="1" DataContext="{Binding SelectedItem, ElementName=Persons}" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
