@@ -26,7 +26,7 @@
         <Grid Grid.Column="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -37,27 +37,25 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="2.5*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="1" Content="ID:" HorizontalContentAlignment="Right" />
-                <Label Grid.Row="0" Grid.Column="2" Content="{Binding Id}"/>
+                <Label Grid.Row="0" Grid.Column="2" Content="ID:" HorizontalContentAlignment="Right" />
+                <Label Grid.Row="0" Grid.Column="3" Content="{Binding Id}" HorizontalContentAlignment="Left"/>
             </Grid>
-            <Grid Grid.Row="1" DataContext="{Binding SelectedItem, ElementName=Persons}" >
+            <Grid x:Name="AncestorOfImage" Grid.Row="1" DataContext="{Binding SelectedItem, ElementName=Persons}"  >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Image  Grid.Column="0" Source="{Binding Image}" Height="120" Stretch="Uniform" Grid.ColumnSpan="1" />
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBox Grid.Row="0"  Text="{Binding FirstName}" />
-                    <TextBox Grid.Row="1" Text="{Binding LastName}" />
-                    <TextBox Grid.Row="2"  Text="{Binding Age}" />
-                    <TextBox Grid.Row="3"  Text="{Binding Sex}"/>
-                </Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" Grid.Column="1"   Text="{Binding FirstName}" />
+                <TextBox Grid.Row="1" Grid.Column="1"  Text="{Binding LastName}" />
+                <TextBox Grid.Row="2" Grid.Column="1"   Text="{Binding Age}" />
+                <TextBox Grid.Row="3" Grid.Column="1"   Text="{Binding Sex}"/>
+                <Image  Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Source="{Binding Image}" Stretch="Uniform"   />
             </Grid>
             <Grid Grid.Row="2" Margin="0 5 0 0" DataContext="{Binding SelectedItem, ElementName=Persons}">
                 <Grid.ColumnDefinitions>
@@ -66,19 +64,18 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label  Grid.Column="0" Content="Login:" HorizontalContentAlignment="Right" />
+                <Label Grid.Column="0" Content="Login:" HorizontalContentAlignment="Right" />
                 <Label Grid.Column="1"  Content="{Binding Login}"/>
-                <Label  Grid.Column="2" Content="Pass:" HorizontalContentAlignment="Right" />
+                <Label Grid.Column="2" Content="Pass:" HorizontalContentAlignment="Right" />
                 <Label Grid.Column="3" Content="{Binding Pass}"/>
             </Grid>
-
-            <Grid Grid.Row="3" Margin="0 1 0 0">
+            <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="1.5*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Content="Delete person" Grid.Column="1" Command="{Binding RemovePersonCommand}"/>
+                <Button Content="Save Changes" Grid.Column="0" Margin="5" Command="{Binding RemovePersonCommand}"/>
+                <Button Content="Delete person" Grid.Column="1"  Margin="5" Command="{Binding RemovePersonCommand}"/>
             </Grid>
 
         </Grid>
