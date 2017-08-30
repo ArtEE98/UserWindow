@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,29 @@ namespace WpfApp6.Utils
                 context.SaveChanges();
             });
         }
+        public static async void SaveChanges(Person p)
+        {
+            await Task.Run(() =>
+            {
+                var context = new gbua_usermapEntities1();
+                users UpdatePerson = new users
+                {
+                    id = Convert.ToInt32(p.Id),
+                };
+                UpdatePerson.login = p.Login;
+                UpdatePerson.password = p.Pass;
+                UpdatePerson.name = p.FirstName;
+                UpdatePerson.surname = p.LastName;
+                UpdatePerson.age = p.Age;
+                UpdatePerson.sex = p.Sex;
+                UpdatePerson.image = ImageProcess.imageToByteArray(p.Image);
+                UpdatePerson.photo = "";
 
+                context.users.Attach(UpdatePerson);
+                context.Entry<users>(UpdatePerson).State = EntityState.Modified;
+                context.SaveChanges();
+            });
+        }
 
 
 

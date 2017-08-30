@@ -98,7 +98,7 @@ namespace WpfApp6.Model
         public void OnPropertyChanged(string param)
         {
             if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs("param"));
+                PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(param));
         }
     }
     

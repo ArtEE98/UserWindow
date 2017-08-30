@@ -44,7 +44,7 @@ namespace WpfApp6.ViewModel
         public Person Selected
         {
             get { return selected; }
-            set { selected = value; OnPropertyChanged("Selected"); RemovePersonCommand.RaiseCanExecuteChanged(); }
+            set { selected = value; OnPropertyChanged("Selected"); RemovePersonCommand.RaiseCanExecuteChanged(); SaveChanges.RaiseCanExecuteChanged(); }
         }
         private DelegateCommand removePersonCommand;
         public DelegateCommand RemovePersonCommand
@@ -93,6 +93,18 @@ namespace WpfApp6.ViewModel
                 return addPersonCommand ?? (addPersonCommand = new DelegateCommand(AddNewPerson,CanAddPerson));
             }
         }
+        private void SaveChangesToBD(object args)
+        {
+            DB.SaveChanges(Selected);
+        }
+        private DelegateCommand saveChanges;
+        public DelegateCommand SaveChanges
+        {
+            get
+            {
+                return saveChanges ?? (saveChanges = new DelegateCommand(SaveChangesToBD, CanRemovePerson));
+            }
+        }
         #region Private Methods
         private Person FindPerson(Person findperson)
         {
@@ -108,7 +120,7 @@ namespace WpfApp6.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(param));
         }
         #region ForPhoto
-
+        
         public ICommand SaveDiractory { get; set; }
 
         private void LoadSaveDiractory(object parameter)
@@ -128,9 +140,11 @@ namespace WpfApp6.ViewModel
             get { return savepath; }
             set
             {
-                savepath = value; 
-                if(ImageProcess.ImageFromPath(savepath, personforAdd))
-                    OnPropertyChanged("savepath");
+                savepath = value;
+                if (ImageProcess.ImageFromPath(savepath, personforAdd, selected))
+                {
+                    OnPropertyChanged("savepath"); OnPropertyChanged("Image");
+                }
             }
         }
         

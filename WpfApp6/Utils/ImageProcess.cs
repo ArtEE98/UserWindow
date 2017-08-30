@@ -48,7 +48,7 @@ namespace WpfApp6.Utils
             }
         }
 
-        public static bool ImageFromPath(string _savepath, Person personforAdd)
+        public static bool ImageFromPath(string _savepath, Person personforAdd,Person selected)
         {
             try
             {
@@ -58,15 +58,17 @@ namespace WpfApp6.Utils
                 bmpImg.DecodePixelWidth = 350;
                 bmpImg.CacheOption = BitmapCacheOption.OnLoad;
                 bmpImg.EndInit();
-                personforAdd.Image = bmpImg;
+                if (selected == null)
+                    personforAdd.Image = bmpImg;
+                else
+                    selected.Image = bmpImg;
                 return true;
             }
-            catch (Exception e)
+            catch 
             {
                 MessageBox.Show("There was an error with format of file." +
                     "Please check the path.");
                 return false;
-               // _savepath = "";
             }
         }
     }
